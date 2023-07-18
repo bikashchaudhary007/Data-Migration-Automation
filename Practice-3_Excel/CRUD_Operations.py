@@ -32,6 +32,12 @@ class CRUDOperations:
         self.execute_query(query)
         self.db.connection.commit()
 
+    def add_default_values(self, table, data):
+        set_values = ', '.join([f"{key}='{value}'" for key, value in data.items()])
+        query = f"UPDATE {table} SET {set_values}"
+        self.execute_query(query)
+        self.db.connection.commit()
+
     def delete_data(self, table, condition):
         query = f"DELETE FROM {table} WHERE {condition}"
         self.execute_query(query)

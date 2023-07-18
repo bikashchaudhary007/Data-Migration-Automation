@@ -2,14 +2,21 @@ import pandas as pd
 import pyodbc
 from configuration.config import server, database, username, password
 from UpdateDefaultValues import *
+from datetime import date
+# from bs4 import NepaliDate
+
+# from nepali_datetime import NepaliDate
 
 # Connection details
 connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
 
+today = date.today()
+# print(today)
+
 
 try: 
         # Excel file path
-        excel_file_path = 'MemberRegistration-5.xlsx' 
+        excel_file_path = 'MemberRegistration-6.xlsx' 
 
         # SQL table name
         table_name = 'MemMemberRegistration' 
@@ -17,7 +24,33 @@ try:
         # Read Excel data using pandas
         df = pd.read_excel(excel_file_path)
 
+        #Default Values
+        df['SycMemberTypeId']=3
+        df['UsmOfficeId']=2
         df['SycSalutationId']=30
+        df['BirthOn']='1988-04-13'
+        df['BirthOnBS']='2045/01/01'
+        df['EmailAddress']='name@gmail.com'
+        df['SycNationalityId']=5
+        df['SycOccupationId']=2
+        df['SycReligionId']=1
+        df['SycMaritalStatusId']=3
+        df['SycCasteId']=3
+        df['SycGenderId']=1
+        df['SycVdcId']=1
+        df['RegistrationOn']='2013-04-14'
+        df['RegistrationOnBS']='2070/01/01'
+        df['IntroducedBy']=0
+        df['SycStatusId']=1
+        df['SycMemberGroupId']=11
+        df['CreatedBy']=0
+        df['CreatedOn']=today
+        # df['CreatedOnBs']='2080/04/02'
+        df['CitizenShipIssuedOn']='2008-04-13'
+        df['CitizenShipIssuedOnBs']='2065/01/01'
+        df['SycStateVDCId']=2
+
+
 
         # Connect to the SQL Server database
         connection = pyodbc.connect(connection_string)
@@ -59,6 +92,4 @@ finally:
         cursor.close()
         connection.close()
 
-#Adding Defalut Values
-# MemberDefaultValues()
 
