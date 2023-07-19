@@ -3,6 +3,10 @@ import pyodbc
 from configuration.config import server, database, username, password
 from UpdateDefaultValues import *
 
+from ConvertDate.EnglishNepaliDate import EnglishToNepali
+
+print(EnglishToNepali('2023-07-19'))
+
 
 # Connection details
 connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
